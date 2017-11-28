@@ -32,3 +32,5 @@ print("Hello %s." % name)
 
 age = input("How old are you?")
 print("%s?! Thats really old. You belong in a retirement home." % age)
+
+# This is your life saver
