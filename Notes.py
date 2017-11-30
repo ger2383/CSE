@@ -89,3 +89,26 @@ def grade_calc(percentage):
 
 
 grade_calc(92)
+
+
+def happy_bday (name):
+    print("Happy Birthday to you" +',')
+    print("Happy Birthday to you" + ',')
+    print("Happy Birthday dear " + name + ',')
+    print("Happy Birthday to you" + '.')
+happy_bday("Ger")
+
+
+# Loops
+
+for num in range (10):
+    print(num + 1)
+
+a = 1
+while a < 10:
+    print(a)
+    a += 1
+
+# Random Numbers
+import random # This should be on the line 1
+print(random.randint(0, 1000))
