@@ -1,38 +1,37 @@
-# print("Hello World")
-#
-# # Ger Yang
-#
-# a = 4
-# b = 3
-#
-# print(3 + 5)
-# print(5 - 3)
-# print(3 * 5)
-# print(6 / 2)
-# print(3 ** 2)
-#
-# print()
-# print("Try to figure out how this works")
-# print(13 % 12)
-#
-# # the "%" sign is a modules. It finds the reminder.
-#
-# car_name = "Wiebe Mobile"
-# car_type = "BMW"
-# car_cylinders = 8
-# car_mpg = 5000.9
-#
-# print("I have a car called %s. It's pretty nice." % car_name)
-# print("I have a car called %s. It's a %s." % (car_name, car_type)) # watch the order
-#
-# # Here is where we get a little fancy
-# print("What is your name?")
-# name = input(">_ ")
-# print("Hello %s." % name)
-#
-# age = input("How old are you?")
-# print("%s?! Thats really old. You belong in a retirement home." % age)
+print("Hello World")
 
+ # Ger Yang
+
+a = 4
+b = 3
+
+print(3 + 5)
+print(5 - 3)
+print(3 * 5)
+print(6 / 2)
+print(3 ** 2)
+
+print()
+print("Try to figure out how this works")
+print(13 % 12)
+
+# the "%" sign is a modules. It finds the reminder.
+
+car_name = "Wiebe Mobile"
+car_type = "BMW"
+car_cylinders = 8
+car_mpg = 5000.9
+
+print("I have a car called %s. It's pretty nice." % car_name)
+print("I have a car called %s. It's a %s." % (car_name, car_type)) # watch the order
+
+# Here is where we get a little fancy
+print("What is your name?")
+name = input(">_ ")
+print("Hello %s." % name)
+
+age = input("How old are you?")
+print("%s?! Thats really old. You belong in a retirement home." % age)
 # Functions
 
 
@@ -111,39 +110,19 @@ while a < 10:
 
 # Random Numbers
 import random # This should be on the line 1
-print(random.
-@@ -0,0 +1,34 @@
-print("Hello World")
+print(random.randint(0, 1000)
 
-# Ger Yang
 
-a = 4
-b = 3
 
-print(3 + 5)
-print(5 - 3)
-print(3 * 5)
-print(6 / 2)
-print(3 ** 2)
+# Recasting
+c = '1'
+print(c == 1)   # we have a string and an int
+print(c == str(1))
 
-print()
-print("Try to figure out how this works")
-print(13 % 12)
 
-# the "%" sign is a modules. It finds the reminder.
+# comparisons
 
-car_name = "Wiebe Mobile"
-car_type = "BMW"
-car_cylinders = 8
-car_mpg = 5000.9
+print(1 == 1) # use a double equal sign
+print(1 !=2) # 1 is not equal to 2
+print(not False)
 
-print("I have a car called %s. It's pretty nice." % car_name)
-print("I have a car called %s. It's a %s." % (car_name, car_type)) # watch the order
-
-# Here is where we get a little fancy
-print("What is your name?")
-name = input(">_ ")
-print("Hello %s." % name)
-
-age = input("How old are you?")
-print("%s?! Thats really old. You belong in a retirement home." % age)
