@@ -116,13 +116,13 @@ print(random.randint(0, 1000)
 
 # Recasting
 c = '1'
-print(c == 1)   # we have a string and an int
-print(c == str(1))
+print(c == 1),   # we have a string and an int
+print(c == str(1)),
 
 
 # comparisons
 
-print(1 == 1) # use a double equal sign
-print(1 !=2) # 1 is not equal to 2
+print(1 == 1), # use a double equal sign
+print(1 !=2), # 1 is not equal to 2
 print(not False)
 
