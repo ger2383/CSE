@@ -5,7 +5,7 @@ print("Ready")
 print("Begin")
 
 import random
-print(random.randint(1, 50))
+answer =(random.randint(1, 50))
 # Generate a number
 # Ask the user for an input(number)
 # Does the guess match the number?
@@ -13,5 +13,5 @@ print(random.randint(1, 50))
 # Add 5 guesses
 
 
-(input(" "))
+answer = (input(" "))
 
