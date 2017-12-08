@@ -20,7 +20,7 @@ player_guess = int(input("Choose a number between 1 and 50"))
 def player_guess(winning_number):
     if player_guess == winning_number:
         print("you win!")
-        
+
 
 
 
