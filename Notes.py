@@ -126,3 +126,9 @@ print(1 == 1), # use a double equal sign
 print(1 !=2), # 1 is not equal to 2
 print(not False)
 
+# random.randint(1,50)
+# print(winning_number)
+# player_guess = int(input("Choose a number between 1 and 50"))
+# def player_guess(winning_number):
+#     if player_guess == winning_number:
+#         print("you win!")
