@@ -132,3 +132,14 @@ print(not False)
 # def player_guess(winning_number):
 #     if player_guess == winning_number:
 #         print("you win!")
+
+
+
+# while guesses < 5:
+#     guess = input(" ")
+#     guess = int(guess)
+#
+# guesses = guesses + 1
+#
+# if guess > number:
+#     print("You guess to low guess higher")

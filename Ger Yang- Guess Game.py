@@ -21,5 +21,13 @@ while guesses < 5:
 
 guesses = guesses + 1
 
-if guess > number:
+if guess < number:
     print("You guess to low guess higher")
+
+if guess > number:
+    print("You guess to high guess lower")
+
+    if guess == number:
+        break
+
+if guess == number
