@@ -2,13 +2,17 @@ import random
 money_left = 15
 
 while money_left > 0:
-    dice1 = random.randint(1, 6)
-    dice2 = random.randint(1, 6)
-    sum = dice1 + dice2
+    Dice1 = random.randint(1, 6)
+    Dice2 = random.randint(1, 6)
+    total = Dice1 + Dice2
+    print(total)
 
-    if sum == 7:
-        print("You Won")
-        money_left += 5
-
-
+    if total == 7:
+        print("You Win")
+    elif total > 7:
+        print("You Lose")
+        money_left -= 1
+    elif total < 7:
+        print("You Lose")
+        money_left += 1
 
