@@ -1,5 +1,5 @@
 class Room(object):
-    def __init__(self, south, east, name, north, west, description):
+    def __init__(self, south, east, name, north, west, north_east, north_west, description):
         self.name = name
         self.north = north
         self.south = south
@@ -16,7 +16,15 @@ N_Office = Room(None, "GYM", "North Office", None, "Library", "You are at front 
 E_GYM = Room(None, None, "GYM", "Tiger Alley", "Front Office", "You are now at the gym")
 W_Library = Room("Front Office", None, "Library", "Quad", "Rooms", "Your now at the library")
 W_Class_Rooms = Room(None,"Library", "Rooms", None, None, "You are at some classrooms")
-N_Tiger_Alley = Room(None, "Quad", "Tiger Alley", "None")
+N_Tiger_Alley = Room(None, "Quad", "Tiger Alley", None, None, "BlackTops", None, None)
+W_Quad = Room("BandRoom", "TigerAlley", "Quad", None, "Library", "BathRoom", "Cafeteria", "Your now at the quad.")
+S_Band = Room( None, "Band", "Quad", None, None, None, None, "Your now at the band room.")
+N_W_Cafeteria = Room(None, "Quad", "Cafeteria", None, None, None, None, "Your at the Cafeteria.")
+N_E_BathRoom = Room(None, None, "BathRoom", None, None, "Quad", None, "You are now at the bathroom.")
+N_E_BlackTop = Room("LockerRoom", None, "BlackTop", None, None, "TigerAlley", None, "You are at the blacktop.")
+S_LockerRoom = Room(None, None, "LockerRoom", "BlackTop", None, None, None, "You are next to a locker room.")
+E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W Building", None, None, "You are at science building.")
+W_Wbuidling = Room("Quad", None, "W Building", None, None, "Art Building, ")
 
 current_node = S_Gate['S. Gate']
 directions = ['north', 'south', 'east', 'west', 'northeast', '']
