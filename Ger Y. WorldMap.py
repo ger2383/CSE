@@ -16,7 +16,7 @@ N_Office = Room(None, "GYM", "North Office", None, "Library", "You are at front 
 E_GYM = Room(None, None, "GYM", "Tiger Alley", "Front Office", "You are now at the gym")
 W_Library = Room("Front Office", None, "Library", "Quad", "Rooms", "Your now at the library")
 W_Class_Rooms = Room(None,"Library", "Rooms", None, None, "You are at some classrooms")
-N_Tiger_Alley = Room(None, "Quad", "Tiger Alley", )
+N_Tiger_Alley = Room(None, "Quad", "Tiger Alley", "None")
 
 current_node = S_Gate['S. Gate']
 directions = ['north', 'south', 'east', 'west', 'northeast', '']
