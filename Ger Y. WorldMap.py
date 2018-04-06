@@ -24,7 +24,8 @@ N_E_BathRoom = Room(None, None, "BathRoom", None, None, "Quad", None, "You are n
 N_E_BlackTop = Room("LockerRoom", None, "BlackTop", None, None, "TigerAlley", None, "You are at the blacktop.")
 S_LockerRoom = Room(None, None, "LockerRoom", "BlackTop", None, None, None, "You are next to a locker room.")
 E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W Building", None, None, "You are at science building.")
-W_Wbuidling = Room("Quad", None, "W Building", None, None, "Art Building, ")
+W_WBuidling = Room("Quad", None, "W Building", None, None, "Art Building", None, "You are at W Building")
+W_ArtBuilding = Room(None, "WBuilding", "ArtBuilding", None, None, None, None, "Your now at the art building.")
 
 current_node = S_Gate['S. Gate']
 directions = ['north', 'south', 'east', 'west', 'northeast', '']
