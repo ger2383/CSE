@@ -22,9 +22,10 @@ class Item(object):
     def heal(self):
         print("You just healed")
 
+
 class Weapon(Item):
     def __init__(self, name, value, weight):
-        super(Weapon,self).__init__(name, value, weight)
+        super(Weapon, self).__init__(name, value, weight)
 
     def fire(self):
         print("You shot the gun.")
@@ -46,17 +47,17 @@ class Shotgun(Weapon):
         print("You fire the gun.")
 
 
-class knive(Weapon):
+class Knife(Weapon):
     def __init__(self, name, value, weight):
-        super(knive, self).__init__(name, value, weight)
+        super(Knife, self).__init__(name, value, weight)
 
-    def Stab(self):
-        print("You used the knive.")
+    def stab(self):
+        print("You used the knife.")
 
 
-class M_16(Weapon):
+class M16(Weapon):
     def __init__(self, name, value, weight):
-        super(M_16, self).__init__(name, value, weight)
+        super(M16, self).__init__(name, value, weight)
 
     def fire(self):
         print("You fire the gun.")
@@ -70,9 +71,9 @@ class Attachments(Item):
         Item.put_on(self)
 
 
-class Pistol_Silencer(Attachments):
+class PistolSilencer(Attachments):
     def __init__(self, name, value, weight):
-        super(Pistol_Silencer, self).__init__(name, value, weight)
+        super(PistolSilencer, self).__init__(name, value, weight)
 
     def put_on(self):
         Item.put_on(self.name)
@@ -94,46 +95,47 @@ class Armor(Item):
         Item.put_on(self.name)
 
 
-class Heavy_Armor(Armor):
+class HeavyArmor(Armor):
     def __init__(self, name, value, weight):
-        super(Heavy_Armor, self).__init__(name, value, weight)
+        super(HeavyArmor, self).__init__(name, value, weight)
 
     def put_on(self):
         Item.put_on(self.name)
 
 
-class Light_Armor(Armor):
+class LightArmor(Armor):
     def __init__(self, name, value, weight):
-        super(Light_Armor, self).__init__(name, value, weight)
+        super(LightArmor, self).__init__(name, value, weight)
 
     def put_on(self):
         Item.put_on(self.name)
 
 
-class Healing_Item(Item):
+class HealingItem(Item):
     def __init__(self, name, value, weight):
-        super(Healing_Item, self).__init__(name, value, weight)
+        super(HealingItem, self).__init__(name, value, weight)
 
     def heal(self):
         Item.heal(self)
 
 
-class Bandage(Healing_Item):
+class Bandage(HealingItem):
     def __init__(self, name, value, weight):
         super(Bandage, self).__init__(name, value, weight)
 
     def heal(self):
         Item.heal(self)
 
-class Medic_Pack(Healing_Item):
+
+class MedicPack(HealingItem):
     def __init__(self, name, value, weight):
-        super(Medic_Pack, self).__init__(name, value, weight)
+        super(MedicPack, self).__init__(name, value, weight)
 
     def heal(self):
         Item.heal(self)
 
 
-         # Rooms
+# Rooms
 class Room(object):
     def __init__(self, south, east, name, north, west, north_east, north_west, description):
         self.name = name
@@ -141,35 +143,38 @@ class Room(object):
         self.south = south
         self.east = east
         self.west = west
+        self.north_east = north_east
+        self.north_west = north_west
         self.description = description
 
     def move(self, direction):
         global current_node
         current_node = globals()[getattr(self, direction)]
 
-S_Gate = Room(None, None, "South Gate", "Front Office", None, "You are at south entrance.")
-N_Office = Room(None, "GYM", "North Office", None, "Library", "You are at front office")
-E_GYM = Room(None, None, "GYM", "Tiger Alley", "Front Office", "You are now at the gym")
-W_Library = Room("Front Office", None, "Library", "Quad", "Rooms", "Your now at the library")
-W_Class_Rooms = Room(None,"Library", "Rooms", None, None, "You are at some classrooms")
-N_Tiger_Alley = Room(None, "Quad", "Tiger Alley", None, None, "BlackTops", None, None)
+
+S_Gate = Room(None, None, "South Gate", "Front Office", None, None, None, "You are at south entrance.")
+N_Office = Room(None, "GYM", "North Office", None, "Library", None, None, "You are at front office.")
+E_GYM = Room(None, None, "GYM", "Tiger Alley", "Front Office", None, None, "You are now at the gym.")
+W_Library = Room("Front Office", None, "Library", "Quad", "Rooms", None, None, "Your now at the library.")
+W_Class_Rooms = Room(None, "Library", "Rooms", None, None, None, None, "You are at some classrooms.")
+N_Tiger_Alley = Room(None, "Quad", "Tiger Alley", None, None, "BlackTops", None, "You are walking around the alley.")
 W_Quad = Room("BandRoom", "TigerAlley", "Quad", None, "Library", "BathRoom", "Cafeteria", "Your now at the quad.")
-S_Band = Room( None, "Band", "Quad", None, None, None, None, "Your now at the band room.")
+S_Band = Room(None, "Band", "Quad", None, None, None, None, "Your now at the band room.")
 N_W_Cafeteria = Room(None, "Quad", "Cafeteria", None, None, None, None, "Your at the Cafeteria.")
 N_E_BathRoom = Room(None, None, "BathRoom", None, None, "Quad", None, "You are now at the bathroom.")
 N_E_BlackTop = Room("LockerRoom", None, "BlackTop", None, None, "TigerAlley", None, "You are at the blacktop.")
 S_LockerRoom = Room(None, None, "LockerRoom", "BlackTop", None, None, None, "You are next to a locker room.")
 E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W Building", None, None, "You are at science building.")
-W_WBuidling = Room("Quad", None, "W Building", None, None, "Art Building", None, "You are at W Building")
+W_WBuidling = Room("Quad", None, "W Building", None, None, "Art Building", None, "You are at W Building.")
 W_ArtBuilding = Room(None, "WBuilding", "ArtBuilding", None, None, None, None, "Your now at the art building.")
 
-current_node = S_Gate['S. Gate']
+current_node = S_Gate
 directions = ['north', 'south', 'east', 'west', 'northeast', '']
 short_directions = ['n', 's', 'e', 'w']
 
 while True:
-    print(current_node['Name']) # Change
-    print(current_node['Description']) # Change
+    print(current_node.name)
+    print(current_node.description)
     command = input('>_').lower().strip()
     if command == 'quit':
         quit(0)
@@ -178,10 +183,8 @@ while True:
         command = directions[pos]
     if command in directions:
         try:
-
-            # Change
+            current_node.move(command)
         except KeyError:
             print("You cannot go this way")
     else:
         print("Command not recognize")
-
