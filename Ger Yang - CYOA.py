@@ -151,6 +151,11 @@ class Room(object):
         global current_node
         current_node = globals()[getattr(self, direction)]
 
+Pistol = Pistol("Pistol", 50, 3)
+Shotgun = Shotgun("Shotgun", 70, 6)
+Knife = Knife("Knife", 25, 1)
+M16 = M16("M16", 60, 7.5)
+PistolSilencer = PistolSilencer("PistolSilencer", )
 
 S_Gate = Room(None, None, "South Gate", "Front Office", None, None, None, "You are at south entrance.")
 N_Office = Room(None, "GYM", "North Office", None, "Library", None, None, "You are at front office.")
