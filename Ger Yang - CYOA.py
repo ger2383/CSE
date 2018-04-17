@@ -135,6 +135,29 @@ class MedicPack(HealingItem):
         Item.heal(self)
 
 
+class Characters(object):
+     def __init__(self, name, health, attack, take_damage, death):
+        self.name = name
+        self.health = health
+        self.attack = attack
+        self.take_damage = take_damage
+        self.death = death
+
+
+class Hero(Characters):
+    def __int__(self, name, health, attack, take_damage, death):
+        super(Hero, self).__init__(name, health, attack, take_damage, death)
+
+    def pick_up(self):
+        Item.pick_up(self.name)
+
+class Monster(Characters):
+    def __init__(self, name ,health, attack, take_damage, death):
+        super(Monster, self).__init__(name, health, attack, take_damage, death)
+
+    def attack(self):
+        Hero.attack(self.name)
+
 # Rooms
 class Room(object):
     def __init__(self, south, east, name, north, west, north_east, north_west, description):
@@ -161,6 +184,11 @@ HeavyArmor = HeavyArmor("HeavyArmor", 175, 10)
 LightArmor = LightArmor("LightArmor", 125, 6)
 Bandage = Bandage("Bandage", 20, 0)
 MedicPack = MedicPack("MedicPack", 50, 2)
+
+# Characters
+hero = Hero("Bolt", 100, 10, 15, "You died.")
+
+
 
 S_Gate = Room(None, None, "South Gate", "Front Office", None, None, None, "You are at south entrance.")
 N_Office = Room(None, "GYM", "North Office", None, "Library", None, None, "You are at front office.")
