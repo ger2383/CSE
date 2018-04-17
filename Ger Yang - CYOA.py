@@ -173,6 +173,7 @@ class Room(object):
     def move(self, direction):
         global current_node
         current_node = globals()[getattr(self, direction)]
+    # Weapons
 
 Pistol = Pistol("Pistol", 50, 3)
 Shotgun = Shotgun("Shotgun", 70, 6)
@@ -185,10 +186,13 @@ LightArmor = LightArmor("LightArmor", 125, 6)
 Bandage = Bandage("Bandage", 20, 0)
 MedicPack = MedicPack("MedicPack", 50, 2)
 
-# Characters
+    # Characters
+
 hero = Hero("Bolt", 100, 10, 15, "You died.")
+monster = Monster("Toxic", 100, 4, 10, "You killed the monster")
 
 
+    # Rooms
 
 S_Gate = Room(None, None, "South Gate", "Front Office", None, None, None, "You are at south entrance.")
 N_Office = Room(None, "GYM", "North Office", None, "Library", None, None, "You are at front office.")
