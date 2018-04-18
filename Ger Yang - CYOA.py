@@ -223,6 +223,8 @@ while True:
     elif command in short_directions:
         pos = short_directions.index(command)
         command = directions[pos]
+    if Pistol == 'Fire the gun'
+        fire
     if command in directions:
         try:
             current_node.move(command)
