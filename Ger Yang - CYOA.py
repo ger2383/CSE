@@ -1,3 +1,4 @@
+inventory = []
 class Item(object):
     def __init__(self, name, value, weight):
         self.name = name
@@ -160,7 +161,8 @@ class Monster(Characters):
 
 # Rooms
 class Room(object):
-    def __init__(self, south, east, name, north, west, north_east, north_west, description):
+    def __init__(self, south, east, name, north, west, north_east, north_west, description, item):
+        self.item = item
         self.name = name
         self.north = north
         self.south = south
@@ -223,12 +225,17 @@ while True:
     elif command in short_directions:
         pos = short_directions.index(command)
         command = directions[pos]
-    if Pistol == 'Fire the gun'
-        fire
+
     if command in directions:
         try:
             current_node.move(command)
         except KeyError:
             print("You cannot go this way")
+    # elif command == "shoot":
+    #     for Weapon in inventory:
+    #         if
+            
+
+
     else:
         print("Command not recognize")
