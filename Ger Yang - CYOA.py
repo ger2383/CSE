@@ -1,3 +1,4 @@
+import random
 inventory = []
 class Item(object):
     def __init__(self, name, value, weight):
@@ -161,7 +162,7 @@ class Monster(Characters):
 
 # Rooms
 class Room(object):
-    def __init__(self, south, east, name, north, west, north_east, north_west, description, item):
+    def __init__(self, south, east, name, north, west, north_east, north_west, description, item=None):
         self.item = item
         self.name = name
         self.north = north
@@ -171,6 +172,7 @@ class Room(object):
         self.north_east = north_east
         self.north_west = north_west
         self.description = description
+        self.item = item
 
     def move(self, direction):
         global current_node
@@ -196,17 +198,19 @@ monster = Monster("Toxic", 100, 4, 10, "You killed the monster")
 
     # Rooms
 
-S_Gate = Room(None, None, "South Gate", "Front Office", None, None, None, "You are at south entrance.")
-N_Office = Room(None, "GYM", "North Office", None, "Library", None, None, "You are at front office.")
-E_GYM = Room(None, None, "GYM", "Tiger Alley", "Front Office", None, None, "You are now at the gym.")
-W_Library = Room("Front Office", None, "Library", "Quad", "Rooms", None, None, "Your now at the library.")
-W_Class_Rooms = Room(None, "Library", "Rooms", None, None, None, None, "You are at some classrooms.")
-N_Tiger_Alley = Room(None, "Quad", "Tiger Alley", None, None, "BlackTops", None, "You are walking around the alley.")
-W_Quad = Room("BandRoom", "TigerAlley", "Quad", None, "Library", "BathRoom", "Cafeteria", "Your now at the quad.")
-S_Band = Room(None, "Band", "Quad", None, None, None, None, "Your now at the band room.")
-N_W_Cafeteria = Room(None, "Quad", "Cafeteria", None, None, None, None, "Your at the Cafeteria.")
-N_E_BathRoom = Room(None, None, "BathRoom", None, None, "Quad", None, "You are now at the bathroom.")
-N_E_BlackTop = Room("LockerRoom", None, "BlackTop", None, None, "TigerAlley", None, "You are at the blacktop.")
+S_Gate = Room(None, None, "South Gate", "Front Office", None, None, None, "You are at south entrance.", Knife)
+N_Office = Room(None, "GYM", "North Office", None, "Library", None, None, "You are at front office.", Bandage)
+E_GYM = Room(None, None, "GYM", "Tiger Alley", "Front Office", None, None, "You are now at the gym.", Shotgun)
+W_Library = Room("Front Office", None, "Library", "Quad", "Rooms", None, None, "Your now at the library.", M16)
+W_Class_Rooms = Room(None, "Library", "Rooms", None, None, None, None, "You are at some classrooms.", Scope)
+N_Tiger_Alley = Room(None, "Quad", "Tiger Alley", None, None, "BlackTops", None, "You are walking around the alley.",
+                     Bandage)
+W_Quad = Room("BandRoom", "TigerAlley", "Quad", None, "Library", "BathRoom", "Cafeteria", "Your now at the quad.", None)
+S_Band = Room(None, "Band", "Quad", None, None, None, None, "Your now at the band room.", LightArmor)
+N_W_Cafeteria = Room(None, "Quad", "Cafeteria", None, None, None, None, "Your at the Cafeteria.", PistolSilencer)
+N_E_BathRoom = Room(None, None, "BathRoom", None, None, "Quad", None, "You are now at the bathroom.", Pistol)
+N_E_BlackTop = Room("LockerRoom", None, "BlackTop", None, None, "TigerAlley", None, "You are at the blacktop.",
+                    MedicPack)
 S_LockerRoom = Room(None, None, "LockerRoom", "BlackTop", None, None, None, "You are next to a locker room.")
 E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W Building", None, None, "You are at science building.")
 W_WBuidling = Room("Quad", None, "W Building", None, None, "Art Building", None, "You are at W Building.")
@@ -217,6 +221,7 @@ directions = ['north', 'south', 'east', 'west', 'northeast', '']
 short_directions = ['n', 's', 'e', 'w']
 
 while True:
+    random_numbers = random.randint(1,3)
     print(current_node.name)
     print(current_node.description)
     command = input('>_').lower().strip()
@@ -231,11 +236,13 @@ while True:
             current_node.move(command)
         except KeyError:
             print("You cannot go this way")
-    # elif command == "shoot":
-    #     for Weapon in inventory:
-    #         if
-            
-
+    elif command == "shoot":
+        for item in Weapon:
+            if Weapon.shoot == 15:
+                print("You shot the gun")
+    if hero.health == 0:
+        print("You Died")
+        break
 
     else:
         print("Command not recognize")
