@@ -136,6 +136,8 @@ class MedicPack(HealingItem):
     def heal(self):
         Item.heal(self)
 
+weapon_list = [Shotgun, M16, Pistol]
+
 
 class Characters(object):
      def __init__(self, name, health, attack, take_damage, death):
@@ -163,6 +165,8 @@ class Monster(Characters):
 # Rooms
 class Room(object):
     def __init__(self, south, east, name, north, west, north_east, north_west, description, item=None):
+        if item is None:
+            item = []
         self.item = item
         self.name = name
         self.north = north
@@ -192,29 +196,31 @@ MedicPack = MedicPack("MedicPack", 50, 2)
 
     # Characters
 
-hero = Hero("Bolt", 100, 10, 15, "You died.")
-monster = Monster("Toxic", 100, 4, 10, "You killed the monster")
+hero = Hero("Bolt", 100, 20, 15, "You died.")
+monster = Monster("Toxic", 400, 4, 10, "You killed the monster")
 
 
     # Rooms
 
-S_Gate = Room(None, None, "South Gate", "Front Office", None, None, None, "You are at south entrance.", Knife)
-N_Office = Room(None, "GYM", "North Office", None, "Library", None, None, "You are at front office.", Bandage)
-E_GYM = Room(None, None, "GYM", "Tiger Alley", "Front Office", None, None, "You are now at the gym.", Shotgun)
-W_Library = Room("Front Office", None, "Library", "Quad", "Rooms", None, None, "Your now at the library.", M16)
-W_Class_Rooms = Room(None, "Library", "Rooms", None, None, None, None, "You are at some classrooms.", Scope)
+S_Gate = Room(None, None, "South Gate", "Front Office", None, None, None, "You are at south entrance.", [Knife])
+N_Office = Room(None, "GYM", "North Office", None, "Library", None, None, "You are at front office.", [Bandage])
+E_GYM = Room(None, None, "GYM", "Tiger Alley", "Front Office", None, None, "You are now at the gym.", [Shotgun])
+W_Library = Room("Front Office", None, "Library", "Quad", "Rooms", None, None, "Your now at the library.", [M16])
+W_Class_Rooms = Room(None, "Library", "Rooms", None, None, None, None, "You are at some classrooms.", [Scope])
 N_Tiger_Alley = Room(None, "Quad", "Tiger Alley", None, None, "BlackTops", None, "You are walking around the alley.",
-                     Bandage)
-W_Quad = Room("BandRoom", "TigerAlley", "Quad", None, "Library", "BathRoom", "Cafeteria", "Your now at the quad.", None)
-S_Band = Room(None, "Band", "Quad", None, None, None, None, "Your now at the band room.", LightArmor)
-N_W_Cafeteria = Room(None, "Quad", "Cafeteria", None, None, None, None, "Your at the Cafeteria.", PistolSilencer)
-N_E_BathRoom = Room(None, None, "BathRoom", None, None, "Quad", None, "You are now at the bathroom.", Pistol)
+                     [Bandage])
+W_Quad = Room("BandRoom", "TigerAlley", "Quad", None, "Library", "BathRoom", "Cafeteria", "Your now at the quad.", [None])
+S_Band = Room(None, "Band", "Quad", None, None, None, None, "Your now at the band room.", [LightArmor])
+N_W_Cafeteria = Room(None, "Quad", "Cafeteria", None, None, None, None, "Your at the Cafeteria.", [PistolSilencer])
+N_E_BathRoom = Room(None, None, "BathRoom", None, None, "Quad", None, "You are now at the bathroom.", [Pistol])
 N_E_BlackTop = Room("LockerRoom", None, "BlackTop", None, None, "TigerAlley", None, "You are at the blacktop.",
-                    MedicPack)
-S_LockerRoom = Room(None, None, "LockerRoom", "BlackTop", None, None, None, "You are next to a locker room.")
-E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W Building", None, None, "You are at science building.")
-W_WBuidling = Room("Quad", None, "W Building", None, None, "Art Building", None, "You are at W Building.")
-W_ArtBuilding = Room(None, "WBuilding", "ArtBuilding", None, None, None, None, "Your now at the art building.")
+                    [MedicPack])
+S_LockerRoom = Room(None, None, "LockerRoom", "BlackTop", None, None, None, "You are next to a locker room.",
+                    [HeavyArmor])
+E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W Building", None, None, "You are at science building.",
+                         [None])
+W_WBuilding = Room("Quad", None, "W Building", None, None, "Art Building", None, "You are at W Building.", [None])
+W_ArtBuilding = Room(None, "WBuilding", "ArtBuilding", None, None, None, None, "Your now at the art building.", [None])
 
 current_node = S_Gate
 directions = ['north', 'south', 'east', 'west', 'northeast', '']
@@ -237,8 +243,13 @@ while True:
         except KeyError:
             print("You cannot go this way")
     elif command == "shoot":
-        for item in Weapon:
-            if Weapon.shoot == 15:
+
+        for item in weapon_list:
+            if command == "shoot":
+                print("what do you want to shoot with")
+                if command == item.name:
+                    print("you shot with %s" % item.name)
+
                 print("You shot the gun")
     if hero.health == 0:
         print("You Died")
