@@ -64,6 +64,13 @@ class M16(Weapon):
     def fire(self):
         print("You fire the gun.")
 
+class Ammo(Item):
+    def __init__(self, name, value, weight):
+        super(Ammo, self).__init__(name,value, weight)
+
+class Size(Ammo):
+    def __init__(self):
+
 
 class Attachments(Item):
     def __init__(self, name, value, weight):
