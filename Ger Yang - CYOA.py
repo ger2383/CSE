@@ -66,10 +66,15 @@ class M16(Weapon):
 
 class Ammo(Item):
     def __init__(self, name, value, weight):
-        super(Ammo, self).__init__(name,value, weight)
+        super(Ammo, self).__init__(name, value, weight)
+
 
 class Size(Ammo):
-    def __init__(self):
+    def __init__(self, name, value, weight):
+        super(Size, self).__init__(name, value, weight)
+
+    def Reload(self):
+        print("You reload the gun")
 
 
 class Attachments(Item):
