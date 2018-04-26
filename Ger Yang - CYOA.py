@@ -214,25 +214,28 @@ monster = Monster("Toxic", 400, 4, 10, "You killed the monster")
 
     # Rooms
 
-S_Gate = Room(None, None, "South Gate", "Front Office", None, None, None, "You are at south entrance.", [Knife])
-N_Office = Room(None, "GYM", "North Office", None, "Library", None, None, "You are at front office.", [Bandage])
-E_GYM = Room(None, None, "GYM", "Tiger Alley", "Front Office", None, None, "You are now at the gym.", [Shotgun])
-W_Library = Room("Front Office", None, "Library", "Quad", "Rooms", None, None, "Your now at the library.", [M16])
-W_Class_Rooms = Room(None, "Library", "Rooms", None, None, None, None, "You are at some classrooms.", [Scope])
-N_Tiger_Alley = Room(None, "Quad", "Tiger Alley", None, None, "BlackTops", None, "You are walking around the alley.",
+S_Gate = Room(None, None, "South Gate", "N_Office", None, None, None, "You are at south entrance.", [Knife])
+N_Office = Room(None, "E_GYM", "North Office", None, "W_Library", None, None, "You are at front office.", [Bandage])
+E_GYM = Room(None, None, "GYM", "N_Tiger_Alley", "W_Office", None, None, "You are now at the gym.", [Shotgun])
+W_Library = Room("S_Office", None, "Library", "N_Quad", "W_Class_Rooms", None, None, "Your now at the library.", [M16])
+W_Class_Rooms = Room(None, "E_Library", "Class Rooms", None, None, None, None, "You are at some classrooms.", [Scope])
+N_Tiger_Alley = Room(None, "E_Quad", "Tiger Alley", None, None, "N_E_BlackTops", None, "You are walking around the "
+                    "alley.",
                      [Bandage])
-W_Quad = Room("BandRoom", "TigerAlley", "Quad", None, "Library", "BathRoom", "Cafeteria", "Your now at the quad.", [None])
-S_Band = Room(None, "Band", "Quad", None, None, None, None, "Your now at the band room.", [LightArmor])
-N_W_Cafeteria = Room(None, "Quad", "Cafeteria", None, None, None, None, "Your at the Cafeteria.", [PistolSilencer])
-N_E_BathRoom = Room(None, None, "BathRoom", None, None, "Quad", None, "You are now at the bathroom.", [Pistol])
-N_E_BlackTop = Room("LockerRoom", None, "BlackTop", None, None, "TigerAlley", None, "You are at the blacktop.",
+W_Quad = Room("S_Band", "E_Tiger_Alley", "Quad", None, "W_Library", "N_E_BathRoom", "N_W_Cafeteria", "Your now at the "
+                                                                                                     "quad.", [None])
+S_Band = Room(None, "E_Band", "Quad", None, None, None, None, "Your now at the band room.", [LightArmor])
+N_W_Cafeteria = Room(None, "E_Quad", "Cafeteria", None, None, None, None, "Your at the Cafeteria.", [PistolSilencer])
+N_E_BathRoom = Room(None, None, "BathRoom", None, None, "N_E_Quad", None, "You are now at the bathroom.", [Pistol])
+N_E_BlackTop = Room("S_LockerRoom", None, "BlackTop", None, None, "N_E_Tiger_Alley", None, "You are at the blacktop.",
                     [MedicPack])
-S_LockerRoom = Room(None, None, "LockerRoom", "BlackTop", None, None, None, "You are next to a locker room.",
+S_LockerRoom = Room(None, None, "LockerRoom", "N_BlackTop", None, None, None, "You are next to a locker room.",
                     [HeavyArmor])
-E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W Building", None, None, "You are at science building.",
+E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W_WBuilding", None, None, "You are at science building.",
                          [None])
-W_WBuilding = Room("Quad", None, "W Building", None, None, "Art Building", None, "You are at W Building.", [None])
-W_ArtBuilding = Room(None, "WBuilding", "ArtBuilding", None, None, None, None, "Your now at the art building.", [None])
+W_WBuilding = Room("Quad", None, "WBuilding", None, None, "N_E_ArtBuilding", None, "You are at W Building.", [None])
+W_ArtBuilding = Room(None, "E_WBuilding", "ArtBuilding", None, None, None, None, "Your now at the art building.",
+                     [None])
 
 current_node = S_Gate
 directions = ['north', 'south', 'east', 'west', 'northeast', '']
