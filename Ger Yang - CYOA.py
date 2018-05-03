@@ -185,8 +185,8 @@ class Room(object):
         self.south = south
         self.east = east
         self.west = west
-        self.north_east = north_east
-        self.north_west = north_west
+        self.northeast = north_east
+        self.northwest = north_west
         self.description = description
         self.item = item
 
@@ -214,32 +214,38 @@ monster = Monster("Toxic", 400, 4, 10, "You killed the monster")
 
     # Rooms
 
-S_Gate = Room(None, None, "South Gate", "N_Office", None, None, None, "You are at south entrance.", [Knife])
+S_Gate = Room(None, None, "South Gate", "N_Office", None, None, None, "You are at south entrance.", [None])
 N_Office = Room(None, "E_GYM", "North Office", None, "W_Library", None, None, "You are at front office.", [Bandage])
-E_GYM = Room(None, None, "GYM", "N_Tiger_Alley", "W_Office", None, None, "You are now at the gym.", [Shotgun])
+E_GYM = Room(None, None, "GYM", "N_Tiger_Alley", "W_Office", None, None, "You are now in the gym.", [Shotgun])
 W_Library = Room("S_Office", None, "Library", "N_Quad", "W_Class_Rooms", None, None, "Your now at the library.", [M16])
 W_Class_Rooms = Room(None, "E_Library", "Class Rooms", None, None, None, None, "You are at some classrooms.", [Scope])
-N_Tiger_Alley = Room(None, "E_Quad", "Tiger Alley", None, None, "N_E_BlackTops", None, "You are walking around the "
+N_Tiger_Alley = Room(None, "E_Quad", "Tiger Alley", None, None, "N_E_BlackTop", None, "You are walking around the "
                     "alley.",
                      [Bandage])
 W_Quad = Room("S_Band", "E_Tiger_Alley", "Quad", None, "W_Library", "N_E_BathRoom", "N_W_Cafeteria", "Your now at the "
                                                                                                      "quad.", [None])
 S_Band = Room(None, "E_Band", "Quad", None, None, None, None, "Your now at the band room.", [LightArmor])
-N_W_Cafeteria = Room(None, "E_Quad", "Cafeteria", None, None, None, None, "Your at the Cafeteria.", [PistolSilencer])
+N_W_Cafeteria = Room(None, "E_Quad", "Cafeteria", None, None, None, None, "Your in the Cafeteria.", [PistolSilencer])
 N_E_BathRoom = Room(None, None, "BathRoom", None, None, "N_E_Quad", None, "You are now at the bathroom.", [Pistol])
 N_E_BlackTop = Room("S_LockerRoom", None, "BlackTop", None, None, "N_E_Tiger_Alley", None, "You are at the blacktop.",
                     [MedicPack])
-S_LockerRoom = Room(None, None, "LockerRoom", "N_BlackTop", None, None, None, "You are next to a locker room.",
+S_LockerRoom = Room(None, None, "LockerRoom", "N_E_BlackTop", None, None, None, "You are next to a locker room.",
                     [HeavyArmor])
-E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W_WBuilding", None, None, "You are at science building.",
-                         [None])
-W_WBuilding = Room("Quad", None, "WBuilding", None, None, "N_E_ArtBuilding", None, "You are at W Building.", [None])
-W_ArtBuilding = Room(None, "E_WBuilding", "ArtBuilding", None, None, None, None, "Your now at the art building.",
+E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W_WBuilding", None, None, "You are in"
+                                                                                         "the science building."
+                         [Knife])
+W_WBuilding = Room("Quad", None, "WBuilding", None, None, "N_E_ArtBuilding", None, "You are in the W Building.", [None])
+W_ArtBuilding = Room(None, "E_WBuilding", "ArtBuilding", None, None, None, None, "Your now in the the art building.",
                      [None])
+
+def randomize_item_room():
+    list_of_items = [Pistol, Shotgun, M16, Knife, MedicPack, Bandage, LightArmor, HeavyArmor, PistolSilencer, Scope]
+    list_of_room = [N_Office, E_GYM, W_Library, W_Class_Rooms, N_Tiger_Alley, S_Band, N_W_Cafeteria, N_E_BathRoom,
+                    N_E_BlackTop, S_LockerRoom, E_ScienceBuilding]
 
 current_node = S_Gate
 directions = ['north', 'south', 'east', 'west', 'northeast', '']
-short_directions = ['n', 's', 'e', 'w']
+short_directions = ['n', 's', 'e', 'w', 'ne']
 
 while True:
     random_numbers = random.randint(1,3)
@@ -266,7 +272,7 @@ while True:
                     print("you shot with %s" % item.name)
 
                 print("You shot the gun")
-    if hero.health == 0:
+    elif hero.health == 0:
         print("You Died")
         break
 
