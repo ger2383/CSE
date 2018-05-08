@@ -232,8 +232,7 @@ N_E_BlackTop = Room("S_LockerRoom", None, "BlackTop", None, None, "N_E_Tiger_All
 S_LockerRoom = Room(None, None, "LockerRoom", "N_E_BlackTop", None, None, None, "You are next to a locker room.",
                     [HeavyArmor])
 E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W_WBuilding", None, None, "You are in"
-                                                                                         "the science building."
-                         [Knife])
+                                                                                    "the science building.", [Knife])
 W_WBuilding = Room("Quad", None, "WBuilding", None, None, "N_E_ArtBuilding", None, "You are in the W Building.", [None])
 W_ArtBuilding = Room(None, "E_WBuilding", "ArtBuilding", None, None, None, None, "Your now in the the art building.",
                      [None])
@@ -251,6 +250,12 @@ while True:
     random_numbers = random.randint(1,3)
     print(current_node.name)
     print(current_node.description)
+
+    if current_node.item is not None:
+        print("There is an item to pick up.")
+    else:
+        print("There is no item for you to pick up.")
+
     command = input('>_').lower().strip()
     if command == 'quit':
         quit(0)
@@ -265,13 +270,19 @@ while True:
             print("You cannot go this way")
     elif command == "shoot":
 
-        for item in weapon_list:
-            if command == "shoot":
-                print("what do you want to shoot with")
-                if command == item.name:
-                    print("you shot with %s" % item.name)
+    #     for item in weapon_list:
+    # if command == "shoot":
+    #     print("what do you want to shoot with")
+    # if command == item.name:
+    #     print("you shot with %s" % item.name)
 
-                print("You shot the gun")
+        print("You shot the gun")
+    if 'take' in command:
+        if current_node.item is not None:
+            hero.pick_up()
+            print()
+            current_node.item = None
+        # hero.pick_up()
     elif hero.health == 0:
         print("You Died")
         break
