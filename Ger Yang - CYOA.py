@@ -270,11 +270,11 @@ while True:
             print("You cannot go this way")
     elif command == "shoot":
 
-    #     for item in weapon_list:
-    # if command == "shoot":
-    #     print("what do you want to shoot with")
-    # if command == item.name:
-    #     print("you shot with %s" % item.name)
+        for item in weapon_list:
+            if command == "shoot":
+                print("what do you want to shoot with")
+            if command == item.name:
+                print("you shot with %s" % item.name)
 
         print("You shot the gun")
     if 'take' in command:
