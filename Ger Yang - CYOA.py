@@ -220,8 +220,7 @@ E_GYM = Room(None, None, "GYM", "N_Tiger_Alley", "W_Office", None, None, "You ar
 W_Library = Room("S_Office", None, "Library", "N_Quad", "W_Class_Rooms", None, None, "Your now at the library.", [M16])
 W_Class_Rooms = Room(None, "E_Library", "Class Rooms", None, None, None, None, "You are at some classrooms.", [Scope])
 N_Tiger_Alley = Room(None, "E_Quad", "Tiger Alley", None, None, "N_E_BlackTop", None, "You are walking around the "
-                    "alley.",
-                     [Bandage])
+                                                                                      "alley.",[Bandage])
 W_Quad = Room("S_Band", "E_Tiger_Alley", "Quad", None, "W_Library", "N_E_BathRoom", "N_W_Cafeteria", "Your now at the "
                                                                                                      "quad.", [None])
 S_Band = Room(None, "E_Band", "Quad", None, None, None, None, "Your now at the band room.", [LightArmor])
@@ -252,7 +251,8 @@ while True:
     print(current_node.description)
 
     if current_node.item is not None:
-        print("There is an item to pick up.")
+        print("There is %s for you to pick up"
+              )
     else:
         print("There is no item for you to pick up.")
 
