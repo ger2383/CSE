@@ -64,6 +64,12 @@ class M16(Weapon):
     def fire(self):
         print("You fire the gun.")
 
+class Spear(Weapon):
+    def __init__(self, name, value, weight):
+        super(Spear, self).__inint__(name, value, weight)
+
+    def 
+
 class Ammo(Item):
     def __init__(self, name, value, weight):
         super(Ammo, self).__init__(name, value, weight)
@@ -251,8 +257,7 @@ while True:
     print(current_node.description)
 
     if current_node.item is not None:
-        print("There is %s for you to pick up"
-              )
+        print("There is %s for you to pick up")
     else:
         print("There is no item for you to pick up.")
 
