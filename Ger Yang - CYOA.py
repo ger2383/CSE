@@ -64,12 +64,6 @@ class M16(Weapon):
     def fire(self):
         print("You fire the gun.")
 
-class Spear(Weapon):
-    def __init__(self, name, value, weight):
-        super(Spear, self).__inint__(name, value, weight)
-
-    def 
-
 class Ammo(Item):
     def __init__(self, name, value, weight):
         super(Ammo, self).__init__(name, value, weight)
@@ -165,6 +159,14 @@ class Characters(object):
         self.take_damage = take_damage
         self.death = death
 
+    def move(self, direction):
+        self.location.character.romve(self)
+        try:
+            self.location = globals()[getattr(self.location, direction)]
+        except KeyError:
+            pass
+        self.location.character.append(self)
+
 
 class Hero(Characters):
     def __int__(self, name, health, attack, take_damage, death):
@@ -250,14 +252,16 @@ def randomize_item_room():
 current_node = S_Gate
 directions = ['north', 'south', 'east', 'west', 'northeast', '']
 short_directions = ['n', 's', 'e', 'w', 'ne']
+randomize_item_room()
+
 
 while True:
     random_numbers = random.randint(1,3)
     print(current_node.name)
     print(current_node.description)
 
-    if current_node.item is not None:
-        print("There is %s for you to pick up")
+    if current_node.location.item is not None:
+        print("There is %s for you to pick up" % current_node.item)
     else:
         print("There is no item for you to pick up.")
 
