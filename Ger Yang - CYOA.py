@@ -182,6 +182,9 @@ class Monster(Characters):
     def attack(self):
         Hero.attack(self.name)
 
+    def move(self, direction):
+        self.location = globals()[getattr(self.location, direction)]
+
 # Rooms
 class Room(object):
     def __init__(self, south, east, name, north, west, north_east, north_west, description, item=None):
