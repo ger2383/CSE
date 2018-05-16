@@ -152,25 +152,29 @@ weapon_list = [Shotgun, M16, Pistol]
 
 
 class Characters(object):
-     def __init__(self, name, health, attack, take_damage, death):
+     def __init__(self, name, health, attack, take_damage, death, locations=None):
         self.name = name
         self.health = health
         self.attack = attack
         self.take_damage = take_damage
         self.death = death
+        self.location = locations
 
-    def move(self, direction):
-        self.location.character.romve(self)
-        try:
-            self.location = globals()[getattr(self.location, direction)]
-        except KeyError:
-            pass
-        self.location.character.append(self)
+        def move(self, directions):
+            self.location.character.remove(self)
+            try:
+                self.location = globals()[getattr(self.location, directions)]
+            except KeyError:
+                pass
+            self.location.character.append(self)
 
 
 class Hero(Characters):
     def __int__(self, name, health, attack, take_damage, death):
         super(Hero, self).__init__(name, health, attack, take_damage, death)
+
+    def move(self, direction):
+        self.location = globals()[getattr(self.location, direction)]
 
     def pick_up(self):
         Item.pick_up(self.name)
@@ -182,15 +186,12 @@ class Monster(Characters):
     def attack(self):
         Hero.attack(self.name)
 
-    def move(self, direction):
-        self.location = globals()[getattr(self.location, direction)]
 
 # Rooms
 class Room(object):
     def __init__(self, south, east, name, north, west, north_east, north_west, description, item=None):
         if item is None:
             item = []
-        self.item = item
         self.name = name
         self.north = north
         self.south = south
@@ -202,8 +203,8 @@ class Room(object):
         self.item = item
 
     def move(self, direction):
-        global current_node
-        current_node = globals()[getattr(self, direction)]
+        self.location = globals()[getattr(self.location, direction)]
+
     # Weapons
 
 Pistol = Pistol("Pistol", 50, 3)
@@ -263,8 +264,8 @@ while True:
     print(current_node.name)
     print(current_node.description)
 
-    if current_node.location.item is not None:
-        print("There is %s for you to pick up" % current_node.item)
+    if current_node.item is None:
+        print("There is %s for you to pick up" % current_node.item.name)
     else:
         print("There is no item for you to pick up.")
 
