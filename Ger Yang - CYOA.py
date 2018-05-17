@@ -159,22 +159,21 @@ class Characters(object):
         self.take_damage = take_damage
         self.death = death
         self.location = locations
+        self.inventory = []
 
     def move(self, directions):
-        self.location.character.remove(self)
         try:
             self.location = globals()[getattr(self.location, directions)]
         except KeyError:
             pass
-            self.location.character.append(self)
 
 
 class Hero(Characters):
     def __int__(self, name, health, attack, take_damage, death):
         super(Hero, self).__init__(name, health, attack, take_damage, death)
 
-    def pick_up(self):
-        Item.pick_up(self.name)
+    def pick_up(self, item):
+        self.inventory.append(item)
 
 class Monster(Characters):
     def __init__(self, name ,health, attack, take_damage, death):
@@ -186,7 +185,7 @@ class Monster(Characters):
 
 # Rooms
 class Room(object):
-    def __init__(self, south, east, name, north, west, north_east, north_west, description, item=None):
+    def __init__(self, south, east, name, north, west, north_east, north_west, description, item=[]):
         if item is None:
             item = []
         self.name = name
@@ -221,15 +220,15 @@ monster = Monster("Toxic", 400, 4, 10, "You killed the monster")
 
     # Rooms
 
-S_Gate = Room(None, None, "South Gate", "N_Office", None, None, None, "You are at south entrance.", [None])
+S_Gate = Room(None, None, "South Gate", "N_Office", None, None, None, "You are at south entrance.")
 N_Office = Room(None, "E_GYM", "North Office", None, "W_Library", None, None, "You are at front office.", [Bandage])
 E_GYM = Room(None, None, "GYM", "N_Tiger_Alley", "W_Office", None, None, "You are now in the gym.", [Shotgun])
 W_Library = Room("S_Office", None, "Library", "N_Quad", "W_Class_Rooms", None, None, "Your now at the library.", [M16])
 W_Class_Rooms = Room(None, "E_Library", "Class Rooms", None, None, None, None, "You are at some classrooms.", [Scope])
-N_Tiger_Alley = Room(None, "E_Quad", "Tiger Alley", None, None, "N_E_BlackTop", None, "You are walking around the "
+N_Tiger_Alley = Room(None, "W_Quad", "Tiger Alley", None, None, "N_E_BlackTop", None, "You are walking around the "
                                                                                       "alley.",[Bandage])
 W_Quad = Room("S_Band", "E_Tiger_Alley", "Quad", None, "W_Library", "N_E_BathRoom", "N_W_Cafeteria", "Your now at the "
-                                                                                                     "quad.", [None])
+                                                                                                     "quad.")
 S_Band = Room(None, "E_Band", "Quad", None, None, None, None, "Your now at the band room.", [LightArmor])
 N_W_Cafeteria = Room(None, "E_Quad", "Cafeteria", None, None, None, None, "Your in the Cafeteria.", [PistolSilencer])
 N_E_BathRoom = Room(None, None, "BathRoom", None, None, "N_E_Quad", None, "You are now at the bathroom.", [Pistol])
@@ -248,7 +247,8 @@ def randomize_item_room():
     list_of_room = [N_Office, E_GYM, W_Library, W_Class_Rooms, N_Tiger_Alley, S_Band, N_W_Cafeteria, N_E_BathRoom,
                     N_E_BlackTop, S_LockerRoom, E_ScienceBuilding]
 
-current_node = S_Gate
+
+hero.location = S_Gate
 directions = ['north', 'south', 'east', 'west', 'northeast', '']
 short_directions = ['n', 's', 'e', 'w', 'ne']
 randomize_item_room()
@@ -256,11 +256,14 @@ randomize_item_room()
 
 while True:
     random_numbers = random.randint(1,3)
-    print(current_node.name)
-    print(current_node.description)
+    print(hero.location.name)
+    print(hero.location.description)
 
-    if current_node.item is None:
-        print("There is %s for you to pick up" % current_node.item.name)
+    if len(hero.location.item) > 0:
+        print("The following items are here:")
+        for item in hero.location.item:
+            print(item.name)
+
     else:
         print("There is no item for you to pick up.")
 
@@ -273,15 +276,11 @@ while True:
 
     if command in directions:
         try:
-            current_node.move(command)
+            hero.move(command)
         except KeyError:
             print("You cannot go this way")
 
-        def move(self, direction):
-            self.location = globals()[getattr(self.location, direction)]
-
     elif command == "shoot":
-
         for item in weapon_list:
             if command == "shoot":
                 print("what do you want to shoot with")
@@ -289,15 +288,21 @@ while True:
                 print("you shot with %s" % item.name)
 
         print("You shot the gun")
-    if 'take' in command:
-        if current_node.item is not None:
-            hero.pick_up()
-            print()
-            current_node.item = None
-        # hero.pick_up()
-    elif hero.health == 0:
+    elif 'take' in command:
+        item_requested = command[5:]
+        remove_item = None
+        for item in hero.location.item:
+            if item.name.lower() == item_requested.lower():
+                hero.pick_up(item)
+                print("Taken.")
+                remove_item = item
+        if remove_item is not None:
+            hero.location.item.remove(remove_item)
+        else:
+            print("I don't see it here.")
+    elif hero.health <= 0:
         print("You Died")
         break
 
     else:
-        print("Command not recognize")
+        print("Command not recognized")
