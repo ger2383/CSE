@@ -16,7 +16,7 @@ class Item(object):
         print("The % is about 12 pound" % self.weight)
 
     def pick_up(self):
-        print("You pick up the item")
+        print("You pick up the %s" % self.name)
 
     def put_on(self):
         print("Attachment on")
@@ -35,7 +35,7 @@ class Weapon(Item):
 
 class Pistol(Weapon):
     def __int__(self, name, value, weight):
-        super(Pistol, self).__int__(name, value, weight)
+        super(Pistol, self).__init__(name, value, weight)
 
     def fire(self):
         print("You fire the gun.")
@@ -152,7 +152,7 @@ weapon_list = [Shotgun, M16, Pistol]
 
 
 class Characters(object):
-     def __init__(self, name, health, attack, take_damage, death, locations=None):
+    def __init__(self, name, health, attack, take_damage, death, locations=None):
         self.name = name
         self.health = health
         self.attack = attack
@@ -160,21 +160,18 @@ class Characters(object):
         self.death = death
         self.location = locations
 
-        def move(self, directions):
-            self.location.character.remove(self)
-            try:
-                self.location = globals()[getattr(self.location, directions)]
-            except KeyError:
-                pass
+    def move(self, directions):
+        self.location.character.remove(self)
+        try:
+            self.location = globals()[getattr(self.location, directions)]
+        except KeyError:
+            pass
             self.location.character.append(self)
 
 
 class Hero(Characters):
     def __int__(self, name, health, attack, take_damage, death):
         super(Hero, self).__init__(name, health, attack, take_damage, death)
-
-    def move(self, direction):
-        self.location = globals()[getattr(self.location, direction)]
 
     def pick_up(self):
         Item.pick_up(self.name)
@@ -202,8 +199,6 @@ class Room(object):
         self.description = description
         self.item = item
 
-    def move(self, direction):
-        self.location = globals()[getattr(self.location, direction)]
 
     # Weapons
 
@@ -281,6 +276,10 @@ while True:
             current_node.move(command)
         except KeyError:
             print("You cannot go this way")
+
+        def move(self, direction):
+            self.location = globals()[getattr(self.location, direction)]
+
     elif command == "shoot":
 
         for item in weapon_list:
