@@ -198,6 +198,7 @@ class Room(object):
         self.description = description
         self.enemies = enemies
         self.item = item
+        self.character = []
 
 
     # Weapons
@@ -221,14 +222,14 @@ monster = Monster("Toxic", 400, 4, 10, "You killed the monster")
 
     # Rooms
 
-S_Gate = Room(None, None, "South Gate", "N_Office", None, None, None, "You are at south entrance.", None, [None])
+S_Gate = Room(None, None, "South Gate", "N_Office", None, None, None, "You are at south entrance.", None)
 N_Office = Room(None, "E_GYM", "North Office", None, "W_Library", None, None, "You are\n"
                                                                               " at front office.", None, [Bandage])
 E_GYM = Room(None, None, "GYM", "N_Tiger_Alley", "W_Office", None, None, "You are now in the gym.", None, [Shotgun])
 W_Library = Room("N_Office", None, "Library", "W_Quad", "W_Class_Rooms", None, None, "Your now\n"
                                                                                      " at the library.", None, [M16])
 W_Class_Rooms = Room(None, "W_Library", "Class Rooms", None, None, None, None, "You are at\n"
-                                                                               " some classrooms.", None [Scope])
+                                                                               " some classrooms.", None, [Scope])
 N_Tiger_Alley = Room(None, "W_Quad", "Tiger Alley", None, None, "N_E_BlackTop", None, "You are walking around the "
                                                                                       "alley.", None, [Bandage])
 W_Quad = Room("S_Band", "E_ScienceBuilding", "Quad", "N_Tiger_Alley", "W_Library", "N_E_BathRoom", "N_W_Cafeteria",
@@ -243,10 +244,9 @@ S_LockerRoom = Room(None, None, "LockerRoom", "N_E_BlackTop", None, None, None, 
                     None, [HeavyArmor])
 E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W_WBuilding", None, None, "You are in"
 "the science building.", monster, [Knife])
-W_WBuilding = Room("W_Quad", None, "WBuilding", None, None, "W_ArtBuilding", None, "You are in the W Building.", None,
-                   [None])
+W_WBuilding = Room("W_Quad", None, "WBuilding", None, None, "W_ArtBuilding", None, "You are in the W Building.", None,)
 W_ArtBuilding = Room(None, "W_WBuilding", "ArtBuilding", None, None, None, None, "Your now in the the art building.",
-                     None, [None])
+                     None,)
 
 def randomize_item_room():
     list_of_items = [Pistol, Shotgun, M16, Knife, MedicPack, Bandage, LightArmor, HeavyArmor, PistolSilencer, Scope]
@@ -264,13 +264,15 @@ def place_ghost():
         room = E_ScienceBuilding
         monster.location = room
 
+
 place_ghost()
-print(monster.location.name)
+
 
 while True:
     random_numbers = random.randint(1,3)
     print(hero.location.name)
     print(hero.location.description)
+    print(monster.location.name)
 
     if len(hero.location.item) > 0:
         print("The following items are here:")
@@ -292,6 +294,12 @@ while True:
             hero.move(command)
         except KeyError:
             print("You cannot go this way")
+
+    if 'inventory' in command:
+        if hero.inventory is not None:
+            print(hero.inventory)
+        else:
+            print('You got nothing in your inventory.')
 
     elif command == "shoot":
         for item in weapon_list:
@@ -316,6 +324,6 @@ while True:
     elif hero.health <= 0:
         print("You Died")
         break
-
     else:
         print("Command not recognized")
+    place_ghost()
