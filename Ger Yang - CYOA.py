@@ -1,5 +1,6 @@
-import random
 inventory = []
+
+
 class Item(object):
     def __init__(self, name, value, weight):
         self.name = name
@@ -17,12 +18,6 @@ class Item(object):
 
     def pick_up(self):
         print("You pick up the %s" % self.name)
-
-    def put_on(self):
-        print("Attachment on")
-
-    def heal(self):
-        print("You just healed")
 
 
 class Weapon(Item):
@@ -53,9 +48,6 @@ class Knife(Weapon):
     def __init__(self, name, value, weight):
         super(Knife, self).__init__(name, value, weight)
 
-    def stab(self):
-        print("You used the knife.")
-
 
 class M16(Weapon):
     def __init__(self, name, value, weight):
@@ -63,6 +55,7 @@ class M16(Weapon):
 
     def fire(self):
         print("You fire the gun.")
+
 
 class Ammo(Item):
     def __init__(self, name, value, weight):
@@ -81,72 +74,46 @@ class Attachments(Item):
     def __init__(self, name, value, weight):
         super(Attachments, self).__init__(name, value, weight)
 
-    def put_on(self):
-        Item.put_on(self)
-
 
 class PistolSilencer(Attachments):
     def __init__(self, name, value, weight):
         super(PistolSilencer, self).__init__(name, value, weight)
-
-    def put_on(self):
-        Item.put_on(self.name)
 
 
 class Scope(Attachments):
     def __init__(self, name, value, weight):
         super(Scope, self).__init__(name, value, weight)
 
-    def put_on(self):
-        Item.put_on(self.name)
-
 
 class Armor(Item):
     def __init__(self, name, value, weight):
         super(Armor, self).__init__(name, value, weight)
-
-    def put_on(self):
-        Item.put_on(self.name)
 
 
 class HeavyArmor(Armor):
     def __init__(self, name, value, weight):
         super(HeavyArmor, self).__init__(name, value, weight)
 
-    def put_on(self):
-        Item.put_on(self.name)
-
 
 class LightArmor(Armor):
     def __init__(self, name, value, weight):
         super(LightArmor, self).__init__(name, value, weight)
-
-    def put_on(self):
-        Item.put_on(self.name)
 
 
 class HealingItem(Item):
     def __init__(self, name, value, weight):
         super(HealingItem, self).__init__(name, value, weight)
 
-    def heal(self):
-        Item.heal(self)
-
 
 class Bandage(HealingItem):
     def __init__(self, name, value, weight):
         super(Bandage, self).__init__(name, value, weight)
-
-    def heal(self):
-        Item.heal(self)
 
 
 class MedicPack(HealingItem):
     def __init__(self, name, value, weight):
         super(MedicPack, self).__init__(name, value, weight)
 
-    def heal(self):
-        Item.heal(self)
 
 weapon_list = [Shotgun, M16, Pistol]
 
@@ -223,26 +190,26 @@ monster = Monster("Toxic", 400, 4, 10, "You killed the monster")
     # Rooms
 
 S_Gate = Room(None, None, "South Gate", "N_Office", None, None, None, "You are at south entrance.", None)
-N_Office = Room(None, "E_GYM", "North Office", None, "W_Library", None, None, "You are\n"
-                                                                              " at front office.", None, [Bandage])
+N_Office = Room(None, "E_GYM", "North Office", None, "W_Library", None, None, "You are "
+"at front office.", None, [Bandage])
 E_GYM = Room(None, None, "GYM", "N_Tiger_Alley", "W_Office", None, None, "You are now in the gym.", None, [Shotgun])
-W_Library = Room("N_Office", None, "Library", "W_Quad", "W_Class_Rooms", None, None, "Your now\n"
-                                                                                     " at the library.", None, [M16])
-W_Class_Rooms = Room(None, "W_Library", "Class Rooms", None, None, None, None, "You are at\n"
-                                                                               " some classrooms.", None, [Scope])
+W_Library = Room("N_Office", None, "Library", "W_Quad", "W_Class_Rooms", None, None, "Your now "
+"at the library.", None, [M16])
+W_Class_Rooms = Room(None, "W_Library", "Class Rooms", None, None, None, None, "You are at "
+"some classrooms.", None, [Scope])
 N_Tiger_Alley = Room(None, "W_Quad", "Tiger Alley", None, None, "N_E_BlackTop", None, "You are walking around the "
                                                                                       "alley.", None, [Bandage])
 W_Quad = Room("S_Band", "E_ScienceBuilding", "Quad", "N_Tiger_Alley", "W_Library", "N_E_BathRoom", "N_W_Cafeteria",
               "Your now at the quad.", None)
 S_Band = Room(None, "S_Band", "Quad", None, None, None, None, "Your now at the band room.", None, [LightArmor])
-N_W_Cafeteria = Room(None, "W_Quad", "Cafeteria", None, None, None, None, "You're in the\n"
-                                                                          " Cafeteria.", None, [PistolSilencer])
+N_W_Cafeteria = Room(None, "W_Quad", "Cafeteria", None, None, None, None, "You're in the "
+"Cafeteria.", None, [PistolSilencer])
 N_E_BathRoom = Room(None, None, "BathRoom", None, None, "W_Quad", None, "You are now at the bathroom.", None, [Pistol])
 N_E_BlackTop = Room("S_LockerRoom", None, "BlackTop", None, None, "N_Tiger_Alley", None, "You are at the blacktop.",
                     None, [MedicPack])
 S_LockerRoom = Room(None, None, "LockerRoom", "N_E_BlackTop", None, None, None, "You are next to a locker room.",
                     None, [HeavyArmor])
-E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W_WBuilding", None, None, "You are in"
+E_ScienceBuilding = Room(None, None, "ScienceBuilding", None, "W_WBuilding", None, None, "You are in "
 "the science building.", monster, [Knife])
 W_WBuilding = Room("W_Quad", None, "WBuilding", None, None, "W_ArtBuilding", None, "You are in the W Building.", None,)
 W_ArtBuilding = Room(None, "W_WBuilding", "ArtBuilding", None, None, None, None, "Your now in the the art building.",
@@ -268,19 +235,19 @@ def place_ghost():
 place_ghost()
 
 
+
 while True:
-    random_numbers = random.randint(1,3)
     print(hero.location.name)
     print(hero.location.description)
-    print(monster.location.name)
+
+    if E_ScienceBuilding == hero.location:
+        print("You got poisoned and died")
+        quit(0)
 
     if len(hero.location.item) > 0:
         print("The following items are here:")
-        for item in hero.location.item:
-            print(item.name)
-
-    else:
-        print("There is no item for you to pick up.")
+    for item in hero.location.item:
+        print(item.name)
 
     command = input('>_').lower().strip()
     if command == 'quit':
@@ -325,5 +292,9 @@ while True:
         print("You Died")
         break
     else:
-        print("Command not recognized")
+        if command in short_directions:
+            try:
+                hero.location
+            except KeyError:
+                print("Command not recognized")
     place_ghost()
